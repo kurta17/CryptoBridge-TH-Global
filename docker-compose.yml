@@ -131,6 +131,84 @@ services:
         soft: 262144
         hard: 262144
 
+  # 🔧 ClickHouse Client (Optional - for interactive queries)
+  clickhouse-client:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse-client
+    depends_on:
+      - clickhouse
+    command: >
+      sh -c "sleep 30 && clickhouse-client --host clickhouse --port 9000 --database cryptobridge --user analytics --password analytics123 --query 'CREATE DATABASE IF NOT EXISTS cryptobridge' && 
+             clickhouse-client --host clickhouse --port 9000 --database cryptobridge --user analytics --password analytics123 --query 'CREATE TABLE IF NOT EXISTS transactions (
+               transaction_id String,
+               timestamp DateTime64(3),
+               from_exchange String,
+               to_exchange String,
+               amount Float64,
+               currency String,
+               is_suspicious UInt8,
+               risk_score UInt32,
+               country String,
+               account_type String
+             ) ENGINE = MergeTree() 
+             PARTITION BY toYYYYMM(timestamp) 
+             ORDER BY (timestamp, transaction_id) 
+             SETTINGS index_granularity = 8192'"
+    networks:
+      - cryptobridge-network
+    restart: "no"
+
+  # 🎯 Init Container to setup HDFS directories
+  hdfs-init:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: hdfs-init
+    depends_on:
+      - namenode
+      - datanode
+    command: >
+      bash -c "
+        echo '🚀 Initializing HDFS directories for CryptoBridge Data Lake...'
+        
+        # Wait for HDFS to be ready
+        sleep 30
+        
+        # Create Bronze layer directories (Raw Kafka data)
+        hdfs dfs -mkdir -p /bronze/transactions/normal
+        hdfs dfs -mkdir -p /bronze/transactions/suspicious
+        hdfs dfs -mkdir -p /bronze/transactions/fraud_alerts
+        hdfs dfs -chmod 755 /bronze/transactions
+        
+        # Create Silver layer directories (Cleaned/Processed)
+        hdfs dfs -mkdir -p /silver/transactions/processed
+        hdfs dfs -mkdir -p /silver/transactions/enriched
+        hdfs dfs -chmod 755 /silver/transactions
+        
+        # Create Gold layer directories (Analytics-ready)
+        hdfs dfs -mkdir -p /gold/transactions/daily_agg
+        hdfs dfs -mkdir -p /gold/analytics/fraud_patterns
+        hdfs dfs -mkdir -p /gold/analytics/country_flows
+        hdfs dfs -mkdir -p /gold/fraud_detection/alerts
+        hdfs dfs -mkdir -p /gold/fraud_detection/models
+        hdfs dfs -chmod 755 /gold/transactions
+        hdfs dfs -chmod 755 /gold/analytics
+        hdfs dfs -chmod 755 /gold/fraud_detection
+        
+        # Create streaming checkpoint directories
+        hdfs dfs -mkdir -p /checkpoint/kafka_streaming
+        hdfs dfs -mkdir -p /checkpoint/fraud_detection
+        hdfs dfs -mkdir -p /tmp/spark/streaming
+        hdfs dfs -chmod 777 /tmp/spark
+        hdfs dfs -chmod 755 /checkpoint
+        
+        echo '✅ HDFS directories created successfully!'
+        hdfs dfs -ls /
+      "
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    networks:
+      - cryptobridge-network
+    restart: "no"
+
 volumes:
   clickhouse_data:
   clickhouse_logs:

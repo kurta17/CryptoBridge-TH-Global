@@ -1,0 +1,58 @@
+# 🎭 CryptoBridge Data Lake Requirements
+# Complete Medallion Architecture Dependencies
+
+# ⚡ Big Data Processing
+pyspark==3.5.0
+py4j==0.10.9.7
+
+# 📡 Streaming & Messaging
+kafka-python==2.0.2
+confluent-kafka==2.3.0
+
+# 🗄️ Database Connectors
+clickhouse-connect==0.9.1
+hdfs==2.7.3
+# hdfs3==0.3.1  # Temporarily disabled due to Python 3.13 compatibility issues
+
+# 📊 Data Processing & Analytics
+pandas>=2.2.0
+numpy>=1.24.0
+pyarrow>=15.0.0
+fastparquet>=2024.2.0
+
+# 🌐 Web & API
+requests==2.31.0
+flask==3.0.0
+fastapi==0.104.1
+uvicorn==0.24.0
+
+# 🔧 Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+toml==0.10.2
+click==8.1.7
+
+# 📈 Machine Learning (Optional)
+scikit-learn==1.3.2
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# 🧪 Testing & Development
+pytest==7.4.3
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+
+# 📋 Monitoring & Logging
+prometheus-client==0.19.0
+structlog==23.2.0
+
+# 🛡️ Security
+cryptography==41.0.8
+pyotp==2.9.0
+
+# 🎯 Production Ready
+gunicorn==21.2.0
+supervisor==4.2.5
+faker
+py
