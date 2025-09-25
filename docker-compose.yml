@@ -1,84 +1,49 @@
+version: "3.9"
+
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.4.0
-    container_name: zookeeper
-    restart: always
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    volumes:
-      - zookeeper_data:/var/lib/zookeeper/data
-      - zookeeper_logs:/var/lib/zookeeper/log
-    networks:
-      - cryptobridge-network
-
-  kafka:
-    image: confluentinc/cp-kafka:7.4.0
-    container_name: kafka
-    restart: always
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-      - "9093:9093"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-    volumes:
-      - kafka_data:/var/lib/kafka/data
-    networks:
-      - cryptobridge-network
-
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: kafka-ui
-    restart: always
-    depends_on:
-      - kafka
-    ports:
-      - "8090:8080"
-    environment:
-      KAFKA_CLUSTERS_0_NAME: cryptobridge-cluster
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-    networks:
-      - cryptobridge-network
-
   spark-master:
-    image: bde2020/spark-master:3.3.0-hadoop3.3
+    image: apache/spark:3.4.1
     container_name: spark-master
     restart: always
     ports:
       - "8080:8080"
       - "7077:7077"
     environment:
-      - INIT_DAEMON_STEP=setup_spark
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
     volumes:
-      - ./data:/tmp/data
+      - ./spark-config:/spark/conf
+      - ./data:/data
+      - ./jars:/jars
+      - ./airflow/scripts:/scripts
     networks:
       - cryptobridge-network
 
-  spark-worker-1:
-    image: bde2020/spark-worker:3.3.0-hadoop3.3
-    container_name: spark-worker-1
+  spark-worker:
+    image: apache/spark:3.4.1
+    container_name: spark-worker
     restart: always
     depends_on:
       - spark-master
     ports:
       - "8081:8081"
     environment:
-      - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2g
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
     volumes:
-      - ./data:/tmp/data
+      - ./spark-config:/spark/conf
+      - ./data:/data
+      - ./jars:/jars
+      - ./airflow/scripts:/scripts
     networks:
       - cryptobridge-network
 
@@ -97,12 +62,74 @@ services:
     volumes:
       - clickhouse_data:/var/lib/clickhouse
       - clickhouse_logs:/var/log/clickhouse-server
+    networks:
+      - cryptobridge-network
+
+  airflow-webserver:
+    image: apache/airflow:2.7.1
+    container_name: airflow-webserver
+    command: webserver
+    restart: always
+    ports:
+      - "8089:8080"   # changed from 8090 to 8089 to avoid conflict
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=True
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/scripts:/opt/airflow/scripts
+      - ./data:/data
+    depends_on:
+      - airflow-postgres
+    networks:
+      - cryptobridge-network
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.1
+    container_name: airflow-scheduler
+    command: scheduler
+    restart: always
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/scripts:/opt/airflow/scripts
+      - ./data:/data
+    depends_on:
+      - airflow-postgres
+    networks:
+      - cryptobridge-network
+
+  airflow-postgres:
+    image: postgres:13
+    container_name: airflow-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - airflow_postgres_data:/var/lib/postgresql/data
+    networks:
+      - cryptobridge-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     ulimits:
       nofile:
         soft: 262144
         hard: 262144
-    networks:
-      - cryptobridge-network
 
   # 🔧 ClickHouse Client (Optional - for interactive queries)
   clickhouse-client:
@@ -183,11 +210,9 @@ services:
     restart: "no"
 
 volumes:
-  zookeeper_data:
-  zookeeper_logs:
-  kafka_data:
   clickhouse_data:
   clickhouse_logs:
+  airflow_postgres_data:
 
 networks:
   cryptobridge-network:
