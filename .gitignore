@@ -1,0 +1,9 @@
+./data
+
+/.data/*
+
+**./parquet/**
+**./parquet/.parquet/**
+
+.DS_Store
+data/bronze
