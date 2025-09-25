@@ -22,12 +22,10 @@ def initialize_clickhouse():
     # Step 1: Create database
     print("📁 Creating database 'cryptobridge'...")
     try:
-        response = requests.get(
+        response = requests.post(
             base_url,
-            params={
-                **auth_params,
-                'query': 'CREATE DATABASE IF NOT EXISTS cryptobridge'
-            },
+            params=auth_params,
+            data='CREATE DATABASE IF NOT EXISTS cryptobridge',
             timeout=10
         )
         if response.status_code == 200:
@@ -68,12 +66,10 @@ def initialize_clickhouse():
     """
     
     try:
-        response = requests.get(
+        response = requests.post(
             base_url,
-            params={
-                **auth_params,
-                'query': create_table_query
-            },
+            params=auth_params,
+            data=create_table_query,
             timeout=10
         )
         if response.status_code == 200:
@@ -87,12 +83,10 @@ def initialize_clickhouse():
     # Step 3: Verify table exists and show structure
     print("🔍 Verifying table structure...")
     try:
-        response = requests.get(
+        response = requests.post(
             base_url,
-            params={
-                **auth_params,
-                'query': 'DESCRIBE cryptobridge.transactions FORMAT JSON'
-            },
+            params=auth_params,
+            data='DESCRIBE cryptobridge.transactions FORMAT JSON',
             timeout=5
         )
         
@@ -121,12 +115,10 @@ def initialize_clickhouse():
     """
     
     try:
-        response = requests.get(
+        response = requests.post(
             base_url,
-            params={
-                **auth_params,
-                'query': test_insert_query
-            },
+            params=auth_params,
+            data=test_insert_query,
             timeout=5
         )
         
@@ -134,12 +126,10 @@ def initialize_clickhouse():
             print("✅ Test insert successful")
             
             # Count rows
-            response = requests.get(
+            response = requests.post(
                 base_url,
-                params={
-                    **auth_params,
-                    'query': 'SELECT COUNT(*) as count FROM cryptobridge.transactions FORMAT JSON'
-                },
+                params=auth_params,
+                data='SELECT COUNT(*) as count FROM cryptobridge.transactions FORMAT JSON',
                 timeout=5
             )
             
