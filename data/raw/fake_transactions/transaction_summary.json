@@ -1,0 +1,41 @@
+{
+  "total_transactions": 8420,
+  "total_volume_usd": 616710613.86,
+  "total_volume_thb": 21893226813.45,
+  "average_transaction_usd": 73243.54,
+  "suspicious_transactions": 420,
+  "fraud_rate": 4.99,
+  "crypto_distribution": {
+    "LINK": 718,
+    "ETH": 1140,
+    "AVAX": 697,
+    "USDC": 1046,
+    "BCH": 726,
+    "BTC": 467,
+    "XRP": 361,
+    "USDT": 555,
+    "DOT": 793,
+    "UNI": 445,
+    "BNB": 700,
+    "LTC": 115,
+    "MATIC": 336,
+    "SOL": 194,
+    "ADA": 127
+  },
+  "country_distribution": {
+    "MY": 830,
+    "PH": 1022,
+    "KR": 714,
+    "UK": 779,
+    "JP": 818,
+    "SG": 1329,
+    "VN": 634,
+    "CN": 961,
+    "US": 1282,
+    "RU": 51
+  },
+  "date_range": {
+    "earliest": "2024-09-25T14:47:54.726378",
+    "latest": "2025-09-25T19:51:10.271872"
+  }
+}
