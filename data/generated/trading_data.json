@@ -1,0 +1,357 @@
+{
+  "global_trades": [],
+  "th_trades": [],
+  "price_history": {},
+  "volume_comparison": {
+    "ETHBTC": {
+      "global_daily_trades": 169034,
+      "global_daily_volume": 35881.1558,
+      "th_daily_trades": 16903,
+      "th_daily_volume": 3588.11558,
+      "price_change_24h": -2.995
+    },
+    "LTCBTC": {
+      "global_daily_trades": 4274,
+      "global_daily_volume": 12658.433,
+      "th_daily_trades": 427,
+      "th_daily_volume": 1265.8433000000002,
+      "price_change_24h": -0.107
+    },
+    "BNBBTC": {
+      "global_daily_trades": 67097,
+      "global_daily_volume": 21424.191,
+      "th_daily_trades": 6709,
+      "th_daily_volume": 2142.4191,
+      "price_change_24h": -2.492
+    },
+    "NEOBTC": {
+      "global_daily_trades": 729,
+      "global_daily_volume": 19855.28,
+      "th_daily_trades": 72,
+      "th_daily_volume": 1985.528,
+      "price_change_24h": -2.827
+    },
+    "QTUMETH": {
+      "global_daily_trades": 29,
+      "global_daily_volume": 1882.4,
+      "th_daily_trades": 2,
+      "th_daily_volume": 188.24,
+      "price_change_24h": -0.743
+    },
+    "EOSETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 391642.7,
+      "th_daily_trades": 400,
+      "th_daily_volume": 39164.270000000004,
+      "price_change_24h": -0.325
+    },
+    "SNTETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 11484111.0,
+      "th_daily_trades": 400,
+      "th_daily_volume": 1148411.1,
+      "price_change_24h": 15.725
+    },
+    "BNTETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 263070.3,
+      "th_daily_trades": 400,
+      "th_daily_volume": 26307.03,
+      "price_change_24h": -8.574
+    },
+    "BCCBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "GASBTC": {
+      "global_daily_trades": 82,
+      "global_daily_volume": 4326.0,
+      "th_daily_trades": 8,
+      "th_daily_volume": 432.6,
+      "price_change_24h": -1.119
+    },
+    "BNBETH": {
+      "global_daily_trades": 24296,
+      "global_daily_volume": 9582.276,
+      "th_daily_trades": 2429,
+      "th_daily_volume": 958.2276,
+      "price_change_24h": 0.657
+    },
+    "BTCUSDT": {
+      "global_daily_trades": 4236668,
+      "global_daily_volume": 20623.33124,
+      "th_daily_trades": 423666,
+      "th_daily_volume": 2062.333124,
+      "price_change_24h": -3.753
+    },
+    "ETHUSDT": {
+      "global_daily_trades": 7350250,
+      "global_daily_volume": 902825.9157,
+      "th_daily_trades": 735025,
+      "th_daily_volume": 90282.59157,
+      "price_change_24h": -6.643
+    },
+    "HSRBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "OAXETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "DNTETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "MCOETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "ICNETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "MCOBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "WTCBTC": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 11331662.0,
+      "th_daily_trades": 400,
+      "th_daily_volume": 1133166.2,
+      "price_change_24h": -73.034
+    },
+    "WTCETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "LRCBTC": {
+      "global_daily_trades": 1081,
+      "global_daily_volume": 943040.0,
+      "th_daily_trades": 108,
+      "th_daily_volume": 94304.0,
+      "price_change_24h": -3.947
+    },
+    "LRCETH": {
+      "global_daily_trades": 52,
+      "global_daily_volume": 130900.0,
+      "th_daily_trades": 5,
+      "th_daily_volume": 13090.0,
+      "price_change_24h": 0.781
+    },
+    "QTUMBTC": {
+      "global_daily_trades": 210,
+      "global_daily_volume": 15610.4,
+      "th_daily_trades": 21,
+      "th_daily_volume": 1561.04,
+      "price_change_24h": -3.77
+    },
+    "YOYOBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "OMGBTC": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 597457.9,
+      "th_daily_trades": 400,
+      "th_daily_volume": 59745.79000000001,
+      "price_change_24h": -14.917
+    },
+    "OMGETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 351567.3,
+      "th_daily_trades": 400,
+      "th_daily_volume": 35156.73,
+      "price_change_24h": -25.095
+    },
+    "ZRXBTC": {
+      "global_daily_trades": 267,
+      "global_daily_volume": 171899.0,
+      "th_daily_trades": 26,
+      "th_daily_volume": 17189.9,
+      "price_change_24h": -2.336
+    },
+    "ZRXETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 1984878.0,
+      "th_daily_trades": 400,
+      "th_daily_volume": 198487.80000000002,
+      "price_change_24h": -32.838
+    },
+    "STRATBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "STRATETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "SNGLSBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "SNGLSETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "BQXBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "BQXETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "KNCBTC": {
+      "global_daily_trades": 415,
+      "global_daily_volume": 67368.8,
+      "th_daily_trades": 41,
+      "th_daily_volume": 6736.880000000001,
+      "price_change_24h": -2.341
+    },
+    "KNCETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 343725.1,
+      "th_daily_trades": 400,
+      "th_daily_volume": 34372.51,
+      "price_change_24h": -20.975
+    },
+    "FUNBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "FUNETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 53487685.0,
+      "th_daily_trades": 400,
+      "th_daily_volume": 5348768.5,
+      "price_change_24h": -20.219
+    },
+    "SNMBTC": {
+      "global_daily_trades": 4001,
+      "global_daily_volume": 16010793.0,
+      "th_daily_trades": 400,
+      "th_daily_volume": 1601079.3,
+      "price_change_24h": -52.101
+    },
+    "SNMETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "NEOETH": {
+      "global_daily_trades": 4000,
+      "global_daily_volume": 37983.48,
+      "th_daily_trades": 400,
+      "th_daily_volume": 3798.3480000000004,
+      "price_change_24h": -16.155
+    },
+    "IOTABTC": {
+      "global_daily_trades": 313,
+      "global_daily_volume": 330320.0,
+      "th_daily_trades": 31,
+      "th_daily_volume": 33032.0,
+      "price_change_24h": -1.333
+    },
+    "IOTAETH": {
+      "global_daily_trades": 35,
+      "global_daily_volume": 21502.0,
+      "th_daily_trades": 3,
+      "th_daily_volume": 2150.2000000000003,
+      "price_change_24h": 0.073
+    },
+    "LINKBTC": {
+      "global_daily_trades": 6011,
+      "global_daily_volume": 125589.46,
+      "th_daily_trades": 601,
+      "th_daily_volume": 12558.946000000002,
+      "price_change_24h": -3.231
+    },
+    "LINKETH": {
+      "global_daily_trades": 4934,
+      "global_daily_volume": 88598.14,
+      "th_daily_trades": 493,
+      "th_daily_volume": 8859.814,
+      "price_change_24h": -0.383
+    },
+    "XVGBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "XVGETH": {
+      "global_daily_trades": 148,
+      "global_daily_volume": 4017612.0,
+      "th_daily_trades": 14,
+      "th_daily_volume": 401761.2,
+      "price_change_24h": -4.651
+    },
+    "SALTBTC": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    },
+    "SALTETH": {
+      "global_daily_trades": 0,
+      "global_daily_volume": 0.0,
+      "th_daily_trades": 0,
+      "th_daily_volume": 0.0,
+      "price_change_24h": 0.0
+    }
+  }
+}
