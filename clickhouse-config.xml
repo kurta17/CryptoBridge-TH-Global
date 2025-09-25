@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <listen_host>0.0.0.0</listen_host>
+    <http_port>8123</http_port>
+    <tcp_port>9000</tcp_port>
+    <max_connections>4096</max_connections>
+    <keep_alive_timeout>3</keep_alive_timeout>
+    <users>
+        <analytics>
+            <password>analytics123</password>
+            <profile>default</profile>
+            <quota>default</quota>
+            <access_management>1</access_management>
+        </analytics>
+    </users>
+    <profiles>
+        <default/>
+    </profiles>
+    <quotas>
+        <default/>
+    </quotas>
+    <databases>
+        <cryptobridge>
+            <table>
+                <name>crypto_prices</name>
+                <engine>MergeTree</engine>
+                <structure>
+                    date Date,
+                    coin String,
+                    market String,
+                    close_price_thb Nullable(Float64),
+                    close_price_usd Nullable(Float64),
+                    volume Float64,
+                    quote_volume Float64,
+                    num_trades UInt32,
+                    open_time DateTime,
+                    close_time DateTime
+                </structure>
+                <partition_by>toYYYYMM(date)</partition_by>
+                <order_by>(date, coin, market)</order_by>
+            </table>
+        </cryptobridge>
+    </databases>
+</clickhouse>
